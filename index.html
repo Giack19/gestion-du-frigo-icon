@@ -144,7 +144,7 @@
 
       <p>
         Lors de votre première utilisation,
-        ajoutez cette application à votre écran d’accueil.
+        vous pouvez ajouter cette application à votre écran d’accueil.
       </p>
 
       <div class="steps">
@@ -169,12 +169,56 @@
       </a>
 
       <div class="small">
-        Une seule installation est nécessaire sur votre téléphone.
+        L’installation sur l’écran d’accueil est facultative.
       </div>
 
     </div>
 
   </div>
+
+
+  <script>
+
+    const APP_URL =
+      'https://script.google.com/macros/s/AKfycbyuUXnyYm4bixEszWQ-QdENPOlQ5yJaRU_8mdFTp1IBdCJR3Gyne08Q_SbNVoNGFcdd/exec';
+
+
+    function isStandaloneMode() {
+
+      const standardStandalone =
+        window.matchMedia &&
+        window.matchMedia(
+          '(display-mode: standalone)'
+        ).matches;
+
+      const iosStandalone =
+        window.navigator.standalone === true;
+
+      return (
+        standardStandalone ||
+        iosStandalone
+      );
+    }
+
+
+    window.addEventListener(
+      'load',
+      function() {
+
+        if (
+          isStandaloneMode()
+        ) {
+
+          window.location.replace(
+            APP_URL
+          );
+
+        }
+
+      }
+    );
+
+  </script>
 
 </body>
 
