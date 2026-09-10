@@ -7,33 +7,12 @@
 
   <meta
     name="viewport"
-    content="width=device-width, initial-scale=1"
+    content="width=device-width, initial-scale=1.0"
   >
 
-  <title>
-    Gestion du Frigo
-  </title>
+  <title>Gestion du Frigo</title>
 
-  <meta
-    name="apple-mobile-web-app-capable"
-    content="yes"
-  >
-
-  <meta
-    name="apple-mobile-web-app-title"
-    content="Gestion du Frigo"
-  >
-
-  <meta
-    name="mobile-web-app-capable"
-    content="yes"
-  >
-
-  <meta
-    name="theme-color"
-    content="#ffffff"
-  >
-
+  <!-- Icône iPhone / iPad -->
   <link
     rel="apple-touch-icon"
     href="https://giack19.github.io/gestion-du-frigo-icon/icon.png"
@@ -47,7 +26,20 @@
 
 
   <!--
-    REDIRECTION IMMEDIATE SI LANCEMENT DEPUIS L'ICONE
+    IMPORTANT :
+    On ne lie volontairement PAS le manifest.json ici.
+
+    Cela permet de conserver l'URL complète avec ?pid=...
+    lors de l'ajout à l'écran d'accueil.
+  -->
+
+
+  <!--
+    REDIRECTION AUTOMATIQUE
+
+    Si cette page est ouverte depuis une icône installée
+    sur l'écran d'accueil ET qu'un pid est présent,
+    on redirige immédiatement vers Gestion du Frigo.
   -->
 
   <script>
@@ -63,9 +55,23 @@
 
 
     const personId =
-      params.get(
-        'pid'
+      params.get('pid');
+
+
+    function isStandaloneMode() {
+
+      return (
+
+        window.matchMedia(
+          '(display-mode: standalone)'
+        ).matches
+
+        ||
+
+        window.navigator.standalone === true
+
       );
+    }
 
 
     function buildAppUrl() {
@@ -73,7 +79,6 @@
       if (!personId) {
 
         return APP_URL;
-
       }
 
 
@@ -84,36 +89,13 @@
           personId
         )
       );
-
-    }
-
-
-    function isStandaloneMode() {
-
-      const standardStandalone =
-        window.matchMedia &&
-        window.matchMedia(
-          '(display-mode: standalone)'
-        ).matches;
-
-
-      const iosStandalone =
-        window.navigator.standalone === true;
-
-
-      return (
-        standardStandalone ||
-        iosStandalone
-      );
-
     }
 
 
     /*
-     * Très important :
-     * cette redirection est exécutée
-     * AVANT l'affichage du contenu HTML.
-     */
+      Depuis l'icône de l'écran d'accueil :
+      redirection immédiate vers l'application.
+    */
 
     if (
       isStandaloneMode() &&
@@ -131,88 +113,293 @@
 
   <style>
 
+    * {
+      box-sizing: border-box;
+    }
+
+
     body {
+
       margin: 0;
+
+      padding: 20px;
+
+      background:
+        #f4f7fa;
+
       font-family:
         Arial,
         Helvetica,
         sans-serif;
-      background: #f3f4f6;
-      color: #202124;
+
+      color:
+        #1f2937;
+
     }
 
 
     .container {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
+
+      max-width:
+        520px;
+
+      margin:
+        0 auto;
+
     }
 
 
     .card {
-      width: 100%;
-      max-width: 430px;
-      background: white;
-      border-radius: 16px;
-      padding: 28px;
-      text-align: center;
+
+      background:
+        white;
+
+      border-radius:
+        18px;
+
+      padding:
+        24px;
+
       box-shadow:
-        0 2px 10px
-        rgba(0,0,0,0.10);
+        0 4px 18px
+        rgba(
+          0,
+          0,
+          0,
+          0.08
+        );
+
+      text-align:
+        center;
+
     }
 
 
     .logo {
-      width: 160px;
-      height: 160px;
-      object-fit: cover;
-      border-radius: 28px;
-      margin-bottom: 18px;
+
+      width:
+        100px;
+
+      height:
+        100px;
+
+      border-radius:
+        22px;
+
+      margin-bottom:
+        12px;
+
     }
 
 
     h1 {
-      font-size: 27px;
-      margin: 0 0 10px 0;
+
+      margin:
+        5px 0 8px 0;
+
+      font-size:
+        27px;
+
+      color:
+        #123b63;
+
     }
 
 
-    p {
-      color: #555;
-      line-height: 1.5;
+    .subtitle {
+
+      margin-bottom:
+        24px;
+
+      color:
+        #667085;
+
+      font-size:
+        15px;
+
     }
 
 
-    .steps {
-      text-align: left;
-      background: #f8f9fa;
-      border-radius: 12px;
-      padding: 16px 18px;
-      line-height: 1.6;
-      margin-top: 20px;
+    .instructions {
+
+      text-align:
+        left;
+
+      margin-top:
+        20px;
+
+    }
+
+
+    .device {
+
+      background:
+        #f7f9fc;
+
+      border-radius:
+        14px;
+
+      padding:
+        18px;
+
+      margin:
+        16px 0;
+
+    }
+
+
+    .device h2 {
+
+      margin:
+        0 0 14px 0;
+
+      color:
+        #123b63;
+
+      font-size:
+        19px;
+
+    }
+
+
+    .step {
+
+      margin:
+        10px 0;
+
+      line-height:
+        1.5;
+
+    }
+
+
+    .number {
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      width:
+        25px;
+
+      height:
+        25px;
+
+      margin-right:
+        7px;
+
+      border-radius:
+        50%;
+
+      background:
+        #1479c9;
+
+      color:
+        white;
+
+      font-weight:
+        bold;
+
+      font-size:
+        14px;
+
+    }
+
+
+    .important {
+
+      margin-top:
+        14px;
+
+      padding:
+        12px;
+
+      background:
+        #eaf5ff;
+
+      border-radius:
+        10px;
+
+      color:
+        #17466e;
+
+      line-height:
+        1.45;
+
+      font-size:
+        14px;
+
     }
 
 
     .button {
-      display: block;
-      margin-top: 22px;
-      padding: 15px;
-      border-radius: 10px;
-      text-decoration: none;
-      background: #1a73e8;
-      color: white;
-      font-weight: bold;
-      font-size: 17px;
+
+      display:
+        block;
+
+      width:
+        100%;
+
+      margin-top:
+        22px;
+
+      padding:
+        15px;
+
+      border:
+        none;
+
+      border-radius:
+        12px;
+
+      background:
+        #123b63;
+
+      color:
+        white;
+
+      font-size:
+        16px;
+
+      font-weight:
+        bold;
+
+      text-decoration:
+        none;
+
+      cursor:
+        pointer;
+
     }
 
 
-    .small {
-      font-size: 13px;
-      color: #777;
-      margin-top: 18px;
-      line-height: 1.4;
+    .button:hover {
+
+      background:
+        #0c2e4f;
+
+    }
+
+
+    .footer {
+
+      margin-top:
+        20px;
+
+      text-align:
+        center;
+
+      color:
+        #8a94a3;
+
+      font-size:
+        12px;
+
     }
 
   </style>
@@ -227,8 +414,8 @@
     <div class="card">
 
       <img
-        src="https://giack19.github.io/gestion-du-frigo-icon/icon.png"
         class="logo"
+        src="https://giack19.github.io/gestion-du-frigo-icon/icon.png"
         alt="Gestion du Frigo"
       >
 
@@ -238,34 +425,135 @@
       </h1>
 
 
-      <p>
-        Ajoutez cette page à votre écran d’accueil
-        pour accéder rapidement à Gestion du Frigo.
-      </p>
+      <div class="subtitle">
+        Ajouter un accès rapide sur votre écran d'accueil
+      </div>
 
 
-      <div class="steps">
-
-        <strong>
-          iPhone
-        </strong>
-
-        <br>
-
-        Safari → Partager →
-        Ajouter à l’écran d’accueil
-
-        <br><br>
+      <div class="instructions">
 
 
-        <strong>
-          Android
-        </strong>
+        <!-- iPHONE -->
 
-        <br>
+        <div class="device">
 
-        Chrome → menu ⋮ →
-        Ajouter à l’écran d’accueil
+          <h2>
+            🍎 iPhone / Safari
+          </h2>
+
+
+          <div class="step">
+            <span class="number">1</span>
+            Ouvrez cette page dans
+            <strong>Safari</strong>
+          </div>
+
+
+          <div class="step">
+            <span class="number">2</span>
+            Appuyez sur
+            <strong>Partager</strong>
+            <span style="font-size:20px;">
+              ⬆️
+            </span>
+          </div>
+
+
+          <div class="step">
+            <span class="number">3</span>
+            Choisissez
+            <strong>
+              Ajouter à l'écran d'accueil
+            </strong>
+          </div>
+
+
+          <div class="step">
+            <span class="number">4</span>
+            Appuyez sur
+            <strong>Ajouter</strong>
+          </div>
+
+
+          <div class="important">
+
+            Utilisez ensuite directement
+            l'icône
+            <strong>Gestion du Frigo</strong>.
+
+            <br><br>
+
+            Votre profil sera
+            automatiquement reconnu.
+
+          </div>
+
+        </div>
+
+
+        <!-- ANDROID -->
+
+        <div class="device">
+
+          <h2>
+            🤖 Android / Chrome
+          </h2>
+
+
+          <div class="step">
+            <span class="number">1</span>
+            Ouvrez cette page dans
+            <strong>Chrome</strong>
+          </div>
+
+
+          <div class="step">
+            <span class="number">2</span>
+            Appuyez sur les
+            <strong>3 points ⋮</strong>
+          </div>
+
+
+          <div class="step">
+            <span class="number">3</span>
+            Choisissez
+            <strong>
+              Installer et créer un raccourci
+            </strong>
+          </div>
+
+
+          <div class="step">
+            <span class="number">4</span>
+            Choisissez
+            <strong>
+              Créer un raccourci
+            </strong>
+          </div>
+
+
+          <div class="step">
+            <span class="number">5</span>
+            Appuyez sur
+            <strong>Ajouter</strong>
+          </div>
+
+
+          <div class="important">
+
+            Utilisez ensuite directement
+            l'icône
+            <strong>Gestion du Frigo</strong>
+            sur votre écran d'accueil.
+
+            <br><br>
+
+            Votre profil sera
+            automatiquement reconnu.
+
+          </div>
+
+        </div>
 
       </div>
 
@@ -279,10 +567,10 @@
       </a>
 
 
-      <div class="small">
+      <div class="footer">
 
-        Cette opération ne doit être effectuée
-        qu’une seule fois.
+        Vous ne devez effectuer cette
+        opération qu'une seule fois.
 
       </div>
 
@@ -293,6 +581,11 @@
 
   <script>
 
+    /*
+      Le bouton de retour conserve également
+      l'identifiant personnel.
+    */
+
     document
       .getElementById(
         'returnButton'
@@ -301,7 +594,6 @@
       buildAppUrl();
 
   </script>
-
 
 </body>
 
