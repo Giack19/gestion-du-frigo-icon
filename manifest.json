@@ -1,13 +1,14 @@
 {
   "name": "Gestion du Frigo",
   "short_name": "Frigo",
-  "start_url": "/gestion-du-frigo-icon/",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ffffff",
   "icons": [
     {
-      "src": "https://giack19.github.io/gestion-du-frigo-icon/icon.png",
+      "src": "./icon.png",
       "sizes": "1024x1024",
       "type": "image/png",
       "purpose": "any"
