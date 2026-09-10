@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="fr">
 
 <head>
@@ -10,13 +11,40 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Gestion du Frigo</title>
+  <title>
+    Gestion du Frigo
+  </title>
 
-  <!-- Icône iPhone / iPad -->
+
+  <meta
+    name="apple-mobile-web-app-capable"
+    content="yes"
+  >
+
+
+  <meta
+    name="apple-mobile-web-app-title"
+    content="Gestion du Frigo"
+  >
+
+
+  <meta
+    name="mobile-web-app-capable"
+    content="yes"
+  >
+
+
+  <meta
+    name="theme-color"
+    content="#ffffff"
+  >
+
+
   <link
     rel="apple-touch-icon"
     href="https://giack19.github.io/gestion-du-frigo-icon/icon.png"
   >
+
 
   <link
     rel="icon"
@@ -24,23 +52,6 @@
     href="https://giack19.github.io/gestion-du-frigo-icon/icon.png"
   >
 
-
-  <!--
-    IMPORTANT :
-    On ne lie volontairement PAS le manifest.json ici.
-
-    Cela permet de conserver l'URL complète avec ?pid=...
-    lors de l'ajout à l'écran d'accueil.
-  -->
-
-
-  <!--
-    REDIRECTION AUTOMATIQUE
-
-    Si cette page est ouverte depuis une icône installée
-    sur l'écran d'accueil ET qu'un pid est présent,
-    on redirige immédiatement vers Gestion du Frigo.
-  -->
 
   <script>
 
@@ -55,22 +66,42 @@
 
 
     const personId =
-      params.get('pid');
+      params.get(
+        'pid'
+      );
+
+
+    /*
+     * install=1 signifie que l'utilisateur
+     * vient volontairement demander
+     * les instructions.
+     */
+
+    const installationMode =
+      params.get(
+        'install'
+      ) === '1';
 
 
     function isStandaloneMode() {
 
-      return (
-
+      const standardStandalone =
+        window.matchMedia &&
         window.matchMedia(
           '(display-mode: standalone)'
-        ).matches
+        ).matches;
 
-        ||
 
-        window.navigator.standalone === true
+      const iosStandalone =
+        window.navigator.standalone ===
+        true;
 
+
+      return (
+        standardStandalone ||
+        iosStandalone
       );
+
     }
 
 
@@ -79,6 +110,7 @@
       if (!personId) {
 
         return APP_URL;
+
       }
 
 
@@ -89,17 +121,76 @@
           personId
         )
       );
+
+    }
+
+
+    function buildCleanInstallUrl() {
+
+      if (!personId) {
+
+        return (
+          window.location.origin +
+          window.location.pathname
+        );
+
+      }
+
+
+      return (
+        window.location.origin +
+        window.location.pathname +
+        '?pid=' +
+        encodeURIComponent(
+          personId
+        )
+      );
+
     }
 
 
     /*
-      Depuis l'icône de l'écran d'accueil :
-      redirection immédiate vers l'application.
-    */
+     * IMPORTANT
+     *
+     * Si l'utilisateur arrive avec install=1,
+     * on garde cette information en mémoire
+     * pour CE chargement.
+     *
+     * Mais on enlève ensuite install=1
+     * de l'adresse visible.
+     *
+     * Ainsi :
+     * - les instructions restent affichées ;
+     * - l'icône créée mémorisera seulement ?pid=...
+     */
+
+    if (
+      installationMode
+    ) {
+
+      window.history.replaceState(
+        {},
+        '',
+        buildCleanInstallUrl()
+      );
+
+    }
+
+
+    /*
+     * Si l'application est ouverte depuis
+     * l'icône déjà installée :
+     *
+     * ?pid=... est présent
+     * install=1 n'était PAS présent
+     *
+     * => redirection directe.
+     */
 
     if (
       isStandaloneMode() &&
-      personId
+      personId &&
+      !installationMode
     ) {
 
       window.location.replace(
@@ -378,14 +469,6 @@
     }
 
 
-    .button:hover {
-
-      background:
-        #0c2e4f;
-
-    }
-
-
     .footer {
 
       margin-top:
@@ -413,6 +496,7 @@
 
     <div class="card">
 
+
       <img
         class="logo"
         src="https://giack19.github.io/gestion-du-frigo-icon/icon.png"
@@ -426,7 +510,10 @@
 
 
       <div class="subtitle">
-        Ajouter un accès rapide sur votre écran d'accueil
+
+        Ajouter un accès rapide
+        sur votre écran d'accueil
+
       </div>
 
 
@@ -443,35 +530,52 @@
 
 
           <div class="step">
-            <span class="number">1</span>
+
+            <span class="number">
+              1
+            </span>
+
             Ouvrez cette page dans
             <strong>Safari</strong>
+
           </div>
 
 
           <div class="step">
-            <span class="number">2</span>
+
+            <span class="number">
+              2
+            </span>
+
             Appuyez sur
             <strong>Partager</strong>
-            <span style="font-size:20px;">
-              ⬆️
-            </span>
+
           </div>
 
 
           <div class="step">
-            <span class="number">3</span>
+
+            <span class="number">
+              3
+            </span>
+
             Choisissez
             <strong>
               Ajouter à l'écran d'accueil
             </strong>
+
           </div>
 
 
           <div class="step">
-            <span class="number">4</span>
+
+            <span class="number">
+              4
+            </span>
+
             Appuyez sur
             <strong>Ajouter</strong>
+
           </div>
 
 
@@ -479,7 +583,9 @@
 
             Utilisez ensuite directement
             l'icône
-            <strong>Gestion du Frigo</strong>.
+            <strong>
+              Gestion du Frigo
+            </strong>.
 
             <br><br>
 
@@ -501,41 +607,70 @@
 
 
           <div class="step">
-            <span class="number">1</span>
+
+            <span class="number">
+              1
+            </span>
+
             Ouvrez cette page dans
             <strong>Chrome</strong>
+
           </div>
 
 
           <div class="step">
-            <span class="number">2</span>
+
+            <span class="number">
+              2
+            </span>
+
             Appuyez sur les
-            <strong>3 points ⋮</strong>
+            <strong>
+              3 points ⋮
+            </strong>
+
           </div>
 
 
           <div class="step">
-            <span class="number">3</span>
+
+            <span class="number">
+              3
+            </span>
+
             Choisissez
             <strong>
               Installer et créer un raccourci
             </strong>
+
           </div>
 
 
           <div class="step">
-            <span class="number">4</span>
+
+            <span class="number">
+              4
+            </span>
+
             Choisissez
             <strong>
               Créer un raccourci
             </strong>
+
           </div>
 
 
           <div class="step">
-            <span class="number">5</span>
+
+            <span class="number">
+              5
+            </span>
+
             Appuyez sur
-            <strong>Ajouter</strong>
+            <strong>
+              Ajouter
+            </strong>
+
           </div>
 
 
@@ -543,8 +678,9 @@
 
             Utilisez ensuite directement
             l'icône
-            <strong>Gestion du Frigo</strong>
-            sur votre écran d'accueil.
+            <strong>
+              Gestion du Frigo
+            </strong>.
 
             <br><br>
 
@@ -563,14 +699,16 @@
         class="button"
         href="#"
       >
+
         Retour à Gestion du Frigo
+
       </a>
 
 
       <div class="footer">
 
-        Vous ne devez effectuer cette
-        opération qu'une seule fois.
+        Vous ne devez effectuer
+        cette opération qu'une seule fois.
 
       </div>
 
@@ -580,11 +718,6 @@
 
 
   <script>
-
-    /*
-      Le bouton de retour conserve également
-      l'identifiant personnel.
-    */
 
     document
       .getElementById(
