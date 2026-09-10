@@ -36,8 +36,6 @@
   >
 
 
-  <!-- Icône personnalisée -->
-
   <link
     rel="apple-touch-icon"
     href="https://giack19.github.io/gestion-du-frigo-icon/icon.png"
@@ -53,61 +51,32 @@
   <style>
 
     body {
-
       margin: 0;
-
       font-family:
         Arial,
         Helvetica,
         sans-serif;
-
-      background:
-        #f3f4f6;
-
-      color:
-        #202124;
+      background: #f3f4f6;
+      color: #202124;
     }
 
 
     .container {
-
-      min-height:
-        100vh;
-
-      display:
-        flex;
-
-      align-items:
-        center;
-
-      justify-content:
-        center;
-
-      padding:
-        20px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
     }
 
 
     .card {
-
-      width:
-        100%;
-
-      max-width:
-        430px;
-
-      background:
-        white;
-
-      border-radius:
-        16px;
-
-      padding:
-        28px;
-
-      text-align:
-        center;
-
+      width: 100%;
+      max-width: 430px;
+      background: white;
+      border-radius: 16px;
+      padding: 28px;
+      text-align: center;
       box-shadow:
         0 2px 10px
         rgba(0,0,0,0.10);
@@ -115,110 +84,58 @@
 
 
     .logo {
-
-      width:
-        160px;
-
-      height:
-        160px;
-
-      object-fit:
-        cover;
-
-      border-radius:
-        28px;
-
-      margin-bottom:
-        18px;
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 28px;
+      margin-bottom: 18px;
     }
 
 
     h1 {
-
-      font-size:
-        27px;
-
+      font-size: 27px;
       margin:
-        0 0 10px 0;
+        0
+        0
+        10px
+        0;
     }
 
 
     p {
-
-      color:
-        #555;
-
-      line-height:
-        1.5;
+      color: #555;
+      line-height: 1.5;
     }
 
 
     .steps {
-
-      text-align:
-        left;
-
-      background:
-        #f8f9fa;
-
-      border-radius:
-        12px;
-
-      padding:
-        16px 18px;
-
-      line-height:
-        1.6;
-
-      margin-top:
-        20px;
+      text-align: left;
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 16px 18px;
+      line-height: 1.6;
+      margin-top: 20px;
     }
 
 
     .button {
-
-      display:
-        block;
-
-      margin-top:
-        22px;
-
-      padding:
-        15px;
-
-      border-radius:
-        10px;
-
-      text-decoration:
-        none;
-
-      background:
-        #1a73e8;
-
-      color:
-        white;
-
-      font-weight:
-        bold;
-
-      font-size:
-        17px;
+      display: block;
+      margin-top: 22px;
+      padding: 15px;
+      border-radius: 10px;
+      text-decoration: none;
+      background: #1a73e8;
+      color: white;
+      font-weight: bold;
+      font-size: 17px;
     }
 
 
     .small {
-
-      font-size:
-        13px;
-
-      color:
-        #777;
-
-      margin-top:
-        18px;
-
-      line-height:
-        1.4;
+      font-size: 13px;
+      color: #777;
+      margin-top: 18px;
+      line-height: 1.4;
     }
 
   </style>
@@ -244,56 +161,52 @@
       </h1>
 
 
-      <div id="normalPage">
-
-        <p>
-          Ajoutez Gestion du Frigo
-          à votre écran d’accueil
-          pour y accéder rapidement.
-        </p>
+      <p>
+        Ajoutez cette page à votre écran d’accueil
+        pour accéder directement à votre profil
+        Gestion du Frigo.
+      </p>
 
 
-        <div class="steps">
+      <div class="steps">
 
-          <strong>
-            iPhone
-          </strong>
+        <strong>
+          iPhone
+        </strong>
 
-          <br>
+        <br>
 
-          Safari → Partager →
-          Ajouter à l’écran d’accueil
+        Safari → Partager →
+        Ajouter à l’écran d’accueil
 
-          <br><br>
-
-
-          <strong>
-            Android
-          </strong>
-
-          <br>
-
-          Chrome → menu ⋮ →
-          Ajouter à l’écran d’accueil
-
-        </div>
+        <br><br>
 
 
-        <a
-          id="returnButton"
-          class="button"
-          href="#"
-        >
-          Retour à Gestion du Frigo
-        </a>
+        <strong>
+          Android
+        </strong>
+
+        <br>
+
+        Chrome → menu ⋮ →
+        Ajouter à l’écran d’accueil
+
+      </div>
 
 
-        <div class="small">
+      <a
+        id="returnButton"
+        class="button"
+        href="#"
+      >
+        Retour à Gestion du Frigo
+      </a>
 
-          Vous ne devez effectuer cette opération
-          qu’une seule fois.
 
-        </div>
+      <div class="small">
+
+        Vous ne devez effectuer
+        cette opération qu’une seule fois.
 
       </div>
 
@@ -325,6 +238,7 @@
       if (!personId) {
 
         return APP_URL;
+
       }
 
 
@@ -340,7 +254,7 @@
 
     function isStandaloneMode() {
 
-      const normalStandalone =
+      const standardStandalone =
         window.matchMedia &&
         window.matchMedia(
           '(display-mode: standalone)'
@@ -353,7 +267,7 @@
 
 
       return (
-        normalStandalone ||
+        standardStandalone ||
         iosStandalone
       );
     }
@@ -368,10 +282,9 @@
 
 
     /*
-     * Si la page est lancée depuis
-     * l'icône de l'écran d'accueil,
-     * elle ouvre directement
-     * Gestion du Frigo.
+     * Lancement depuis l'icône :
+     * redirection directe vers Apps Script
+     * AVEC l'ID utilisateur.
      */
 
     if (
@@ -381,6 +294,7 @@
       window.location.replace(
         buildAppUrl()
       );
+
     }
 
   </script>
