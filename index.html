@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 
 <head>
@@ -35,18 +34,18 @@
 
   <link
     rel="apple-touch-icon"
-    href="./icon.png"
+    href="https://giack19.github.io/gestion-du-frigo-icon/icon.png"
   >
 
   <link
     rel="icon"
     type="image/png"
-    href="./icon.png"
+    href="https://giack19.github.io/gestion-du-frigo-icon/icon.png"
   >
 
   <link
     rel="manifest"
-    href="./manifest.json"
+    href="https://giack19.github.io/gestion-du-frigo-icon/manifest.json"
   >
 
   <style>
@@ -77,20 +76,31 @@
     }
 
     .logo {
-      width: 130px;
-      height: 130px;
-      border-radius: 24px;
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 28px;
       margin-bottom: 18px;
     }
 
     h1 {
-      font-size: 24px;
+      font-size: 26px;
       margin: 0 0 12px 0;
     }
 
     p {
-      color: #666;
+      color: #555;
       line-height: 1.5;
+      margin: 10px 0;
+    }
+
+    .steps {
+      text-align: left;
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 15px 18px;
+      margin-top: 20px;
+      line-height: 1.6;
     }
 
     .button {
@@ -105,6 +115,12 @@
       font-size: 17px;
     }
 
+    .small {
+      font-size: 13px;
+      color: #777;
+      margin-top: 18px;
+    }
+
   </style>
 
 </head>
@@ -117,7 +133,7 @@
     <div class="card">
 
       <img
-        src="./icon.png"
+        src="https://giack19.github.io/gestion-du-frigo-icon/icon.png"
         class="logo"
         alt="Gestion du Frigo"
       >
@@ -127,52 +143,38 @@
       </h1>
 
       <p>
-        Ouverture de l’application...
+        Lors de votre première utilisation,
+        ajoutez cette application à votre écran d’accueil.
       </p>
 
+      <div class="steps">
+
+        <strong>Sur iPhone :</strong><br>
+        1. Ouvrir cette page dans Safari<br>
+        2. Appuyer sur Partager<br>
+        3. Choisir « Ajouter à l’écran d’accueil »<br><br>
+
+        <strong>Sur Android :</strong><br>
+        1. Ouvrir cette page dans Chrome<br>
+        2. Ouvrir le menu ⋮<br>
+        3. Choisir « Ajouter à l’écran d’accueil »
+
+      </div>
+
       <a
-        id="openApp"
         class="button"
         href="https://script.google.com/macros/s/AKfycbyuUXnyYm4bixEszWQ-QdENPOlQ5yJaRU_8mdFTp1IBdCJR3Gyne08Q_SbNVoNGFcdd/exec"
       >
         Ouvrir Gestion du Frigo
       </a>
 
+      <div class="small">
+        Une seule installation est nécessaire sur votre téléphone.
+      </div>
+
     </div>
 
   </div>
-
-
-  <script>
-
-    const APP_URL =
-      'https://script.google.com/macros/s/AKfycbyuUXnyYm4bixEszWQ-QdENPOlQ5yJaRU_8mdFTp1IBdCJR3Gyne08Q_SbNVoNGFcdd/exec';
-
-
-    window.addEventListener(
-      'load',
-      function() {
-
-        document
-          .getElementById('openApp')
-          .href = APP_URL;
-
-
-        setTimeout(
-          function() {
-
-            window.location.replace(
-              APP_URL
-            );
-
-          },
-          700
-        );
-
-      }
-    );
-
-  </script>
 
 </body>
 
