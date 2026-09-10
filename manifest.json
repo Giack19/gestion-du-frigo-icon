@@ -8,7 +8,7 @@
   "theme_color": "#ffffff",
   "icons": [
     {
-      "src": "./icon.png",
+      "src": "https://giack19.github.io/gestion-du-frigo-icon/icon.png",
       "sizes": "1024x1024",
       "type": "image/png",
       "purpose": "any"
