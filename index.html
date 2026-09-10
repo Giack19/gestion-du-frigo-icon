@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 
 <head>
@@ -35,7 +34,6 @@
     content="#ffffff"
   >
 
-
   <link
     rel="apple-touch-icon"
     href="https://giack19.github.io/gestion-du-frigo-icon/icon.png"
@@ -46,6 +44,89 @@
     type="image/png"
     href="https://giack19.github.io/gestion-du-frigo-icon/icon.png"
   >
+
+
+  <!--
+    REDIRECTION IMMEDIATE SI LANCEMENT DEPUIS L'ICONE
+  -->
+
+  <script>
+
+    const APP_URL =
+      'https://script.google.com/macros/s/AKfycbyuUXnyYm4bixEszWQ-QdENPOlQ5yJaRU_8mdFTp1IBdCJR3Gyne08Q_SbNVoNGFcdd/exec';
+
+
+    const params =
+      new URLSearchParams(
+        window.location.search
+      );
+
+
+    const personId =
+      params.get(
+        'pid'
+      );
+
+
+    function buildAppUrl() {
+
+      if (!personId) {
+
+        return APP_URL;
+
+      }
+
+
+      return (
+        APP_URL +
+        '?pid=' +
+        encodeURIComponent(
+          personId
+        )
+      );
+
+    }
+
+
+    function isStandaloneMode() {
+
+      const standardStandalone =
+        window.matchMedia &&
+        window.matchMedia(
+          '(display-mode: standalone)'
+        ).matches;
+
+
+      const iosStandalone =
+        window.navigator.standalone === true;
+
+
+      return (
+        standardStandalone ||
+        iosStandalone
+      );
+
+    }
+
+
+    /*
+     * Très important :
+     * cette redirection est exécutée
+     * AVANT l'affichage du contenu HTML.
+     */
+
+    if (
+      isStandaloneMode() &&
+      personId
+    ) {
+
+      window.location.replace(
+        buildAppUrl()
+      );
+
+    }
+
+  </script>
 
 
   <style>
@@ -94,11 +175,7 @@
 
     h1 {
       font-size: 27px;
-      margin:
-        0
-        0
-        10px
-        0;
+      margin: 0 0 10px 0;
     }
 
 
@@ -163,8 +240,7 @@
 
       <p>
         Ajoutez cette page à votre écran d’accueil
-        pour accéder directement à votre profil
-        Gestion du Frigo.
+        pour accéder rapidement à Gestion du Frigo.
       </p>
 
 
@@ -205,8 +281,8 @@
 
       <div class="small">
 
-        Vous ne devez effectuer
-        cette opération qu’une seule fois.
+        Cette opération ne doit être effectuée
+        qu’une seule fois.
 
       </div>
 
@@ -217,85 +293,12 @@
 
   <script>
 
-    const APP_URL =
-      'https://script.google.com/macros/s/AKfycbyuUXnyYm4bixEszWQ-QdENPOlQ5yJaRU_8mdFTp1IBdCJR3Gyne08Q_SbNVoNGFcdd/exec';
-
-
-    const params =
-      new URLSearchParams(
-        window.location.search
-      );
-
-
-    const personId =
-      params.get(
-        'pid'
-      );
-
-
-    function buildAppUrl() {
-
-      if (!personId) {
-
-        return APP_URL;
-
-      }
-
-
-      return (
-        APP_URL +
-        '?pid=' +
-        encodeURIComponent(
-          personId
-        )
-      );
-    }
-
-
-    function isStandaloneMode() {
-
-      const standardStandalone =
-        window.matchMedia &&
-        window.matchMedia(
-          '(display-mode: standalone)'
-        ).matches;
-
-
-      const iosStandalone =
-        window.navigator.standalone ===
-        true;
-
-
-      return (
-        standardStandalone ||
-        iosStandalone
-      );
-    }
-
-
     document
       .getElementById(
         'returnButton'
       )
       .href =
       buildAppUrl();
-
-
-    /*
-     * Lancement depuis l'icône :
-     * redirection directe vers Apps Script
-     * AVEC l'ID utilisateur.
-     */
-
-    if (
-      isStandaloneMode()
-    ) {
-
-      window.location.replace(
-        buildAppUrl()
-      );
-
-    }
 
   </script>
 
