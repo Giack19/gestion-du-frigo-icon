@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 
 <head>
@@ -11,40 +10,35 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>
-    Gestion du Frigo
-  </title>
-
+  <!-- Nom affiché pour le raccourci -->
+  <title>Frigo parta G</title>
 
   <meta
     name="apple-mobile-web-app-capable"
     content="yes"
   >
 
-
+  <!-- Nom sous l'icône sur iPhone / iPad -->
   <meta
     name="apple-mobile-web-app-title"
-    content="Gestion du Frigo"
+    content="Frigo parta G"
   >
-
 
   <meta
     name="mobile-web-app-capable"
     content="yes"
   >
 
-
   <meta
     name="theme-color"
     content="#ffffff"
   >
 
-
+  <!-- Icône -->
   <link
     rel="apple-touch-icon"
     href="https://giack19.github.io/gestion-du-frigo-icon/icon.png"
   >
-
 
   <link
     rel="icon"
@@ -150,18 +144,13 @@
 
 
     /*
-     * IMPORTANT
+     * Si l'utilisateur arrive depuis
+     * "Ajouter à l'écran d'accueil",
+     * on affiche les instructions mais
+     * on retire install=1 de l'URL.
      *
-     * Si l'utilisateur arrive avec install=1,
-     * on garde cette information en mémoire
-     * pour CE chargement.
-     *
-     * Mais on enlève ensuite install=1
-     * de l'adresse visible.
-     *
-     * Ainsi :
-     * - les instructions restent affichées ;
-     * - l'icône créée mémorisera seulement ?pid=...
+     * L'icône enregistrera donc uniquement
+     * l'adresse contenant le pid.
      */
 
     if (
@@ -178,13 +167,11 @@
 
 
     /*
-     * Si l'application est ouverte depuis
+     * Si cette page est ouverte depuis
      * l'icône déjà installée :
      *
-     * ?pid=... est présent
-     * install=1 n'était PAS présent
-     *
-     * => redirection directe.
+     * => redirection directe vers
+     * Gestion du Frigo avec le bon profil.
      */
 
     if (
@@ -212,7 +199,6 @@
     body {
 
       margin: 0;
-
       padding: 20px;
 
       background:
@@ -504,6 +490,11 @@
       >
 
 
+      <!--
+        Le nom de l'application reste
+        Gestion du Frigo dans la page.
+      -->
+
       <h1>
         Gestion du Frigo
       </h1>
@@ -584,7 +575,7 @@
             Utilisez ensuite directement
             l'icône
             <strong>
-              Gestion du Frigo
+              Frigo parta G
             </strong>.
 
             <br><br>
@@ -679,7 +670,7 @@
             Utilisez ensuite directement
             l'icône
             <strong>
-              Gestion du Frigo
+              Frigo parta G
             </strong>.
 
             <br><br>
